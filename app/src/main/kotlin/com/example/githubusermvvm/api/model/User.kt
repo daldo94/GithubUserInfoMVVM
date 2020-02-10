@@ -15,4 +15,7 @@ data class User (
 ) : Serializable{
     val fullName : String
         get() = name?.title + "." + name?.first + "." + name?.last
+
+    val fullLocation : String
+        get() = location?.state + "," + location?.city + "," + location?.postcode
 }
