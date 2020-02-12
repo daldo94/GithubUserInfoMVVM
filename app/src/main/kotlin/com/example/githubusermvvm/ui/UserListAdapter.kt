@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubusermvvm.R
@@ -16,8 +17,14 @@ class UserListAdapter() : RecyclerView.Adapter<UserListAdapter.ViewHolder>()  {
     private var items: List<User> = listOf()
     inner class ViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root)
 
+    override fun getItemViewType(position: Int): Int {
+        return position%2
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user,parent, false)
+
         val viewHolder = ViewHolder(ItemUserBinding.bind(view))
         return viewHolder
     }

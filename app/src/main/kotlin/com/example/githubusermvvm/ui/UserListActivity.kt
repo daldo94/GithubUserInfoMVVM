@@ -45,6 +45,9 @@ class UserListActivity : BaseActivity<ActivityMainBinding>() {
         }
 
 
+        main_btn_add.setOnClickListener { userListViewModel.addData() }
+
+
 
     }
 }

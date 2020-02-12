@@ -46,8 +46,29 @@ class UserListViewModel(adapter: UserListAdapter) : BaseViewModel() {
                     Log.d("GithubUserMVVM", "Fail Load Data")
                 })
         )
+    }
 
+    fun addData(){
+        addDisposable(
+            createRetrofit(GithubAPI::class.java).getUserList("5")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe({response ->
+                    Log.d("GithubUserMVVM", "Success Load More Data")
+                    for(user in response.userList){
+                        Log.d("GithubUserMVVM",user.fullName + ", " + user.gender + ", " + user.fullLocation)
+                    }
 
+                    _items.value = _items.value!! + response.userList
+
+                    _adapter.value?.setItems(_items.value!!)
+
+                },{
+                    Log.d("GithubUserMVVM", "Fail Load Data")
+                })
+        )
     }
 
     private fun showProgress() {

@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githubusermvvm.api.model.User
 import com.example.githubusermvvm.ui.UserListAdapter
 
-
+/*
 @BindingAdapter("bind_items")
 fun setBindItems(view : RecyclerView, items : List<User>){
-    val adapter : UserListAdapter = view.adapter as UserListAdapter
-    adapter.setItems(items)
+    val adapter = view.adapter as? UserListAdapter ?: UserListAdapter().apply { view.adapter = this }
+    adapter.items = items
     adapter.notifyDataSetChanged()
-
 }
+*/
